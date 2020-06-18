@@ -1,14 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import api from "./services/api";
 import "./styles.css";
-import { useState } from "react";
-import { useEffect } from "react";
 
 function App() {
   const [repositories, setRepositories] = useState([]);
 
   useEffect(() => {
-    api.get('respositories').then(response => {
+    api.get('repositories').then(response => {
       setRepositories(response.data);
     });
   }, []);
@@ -24,6 +22,9 @@ function App() {
     const repository = response.data;
 
     setRepositories([...repositories, repository]);
+    
+    //também pode ser feito da forma abaixo
+    //setRepositories([...repositories, response.data]);
   }
 
   async function handleRemoveRepository(id) {
